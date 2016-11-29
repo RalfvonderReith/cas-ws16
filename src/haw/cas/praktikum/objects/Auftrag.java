@@ -16,20 +16,24 @@ public class Auftrag extends MObjekt {
 	private List<Auftrag> subAuftraege;
 	Auftrag parent=null;
 	
+	//TODO einbinden des Auftraggebers! und auszahlen des Geldes!
+	Auftraggeber auftraggeber;
+	
 	public Auftrag(String name, Ort startOrt, Ort endOrt, double gewinn, int menge){
 		super(name);
-		this.startOrt = startOrt;
-		this.endOrt = endOrt;
-		this.gewinn = gewinn;
-		this.menge = menge;
-		this.subAuftraege = new ArrayList<>();
+		setStart(startOrt);
+		setZiel(endOrt);
+		setWert(gewinn);
+		setMenge(menge);
+		this.subAuftraege = new ArrayList<Auftrag>();
 	}
 
 	public Ort getStart() {
 		return startOrt;
 	}
 
-	public void setStart(Ort start) {
+	private void setStart(Ort start) {
+		if(start == null) throw new NullPointerException();
 		this.startOrt = start;
 	}
 
@@ -37,7 +41,8 @@ public class Auftrag extends MObjekt {
 		return endOrt;
 	}
 
-	public void setZiel(Ort ziel) {
+	private void setZiel(Ort ziel) {
+		if(ziel == null) throw new NullPointerException();
 		this.endOrt = ziel;
 	}
 
@@ -45,7 +50,8 @@ public class Auftrag extends MObjekt {
 		return gewinn;
 	}
 
-	public void setWert(double wert) {
+	private void setWert(double wert) {
+		if(wert < 0) throw new IllegalArgumentException("value >= 0 expected");
 		this.gewinn = wert;
 	}
 
@@ -53,7 +59,8 @@ public class Auftrag extends MObjekt {
 		return menge;
 	}
 
-	public void setMenge(int menge) {
+	private void setMenge(int menge) {
+		if(menge < 1) throw new IllegalArgumentException("value > 0 expected");
 		this.menge = menge;
 	}
 
@@ -67,7 +74,19 @@ public class Auftrag extends MObjekt {
 	}
 
 	public List<Auftrag> getAllSubAuftrag() {
-		return subAuftraege;
+		return new ArrayList<Auftrag>(subAuftraege);
 	}
-
+	
+	public boolean isFinished(Ort currentLocation) {
+		//Aufträge werden bei Abschluss aus der Liste der Parent.subaufträge entfernt, deshalb prüfen auf subAuftraege.size() == 0
+		return (endOrt == currentLocation && subAuftraege.size() == 0);
+	}
+	
+	public Auftrag splitAuftrag(String subName, double subGewinn, int subMenge) {
+		if(subGewinn < 0 || subMenge < 1 || subMenge > menge) return null;
+		Auftrag subAuftrag = new Auftrag(subName, startOrt, endOrt, subGewinn, subMenge);
+		this.addSubAuftrag(subAuftrag);
+		this.setMenge(this.getMenge() - subMenge);
+		return subAuftrag;
+	}
 }
