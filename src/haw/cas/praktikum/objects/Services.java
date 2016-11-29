@@ -4,7 +4,7 @@ import java.util.Collection;
 
 
 //TODO:Serialisiuerng . . . 
-public interface LocalServices {
+public interface Services {
 	
 	public String getID();
 }

@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 //TODO:Serialisiuerng . . . 
-public class SchwarzesBrett extends MObjekt implements LocalServices {
+public class SchwarzesBrett extends MObjekt implements Services {
 
 	private List<Nachricht> angepinnt;
 	

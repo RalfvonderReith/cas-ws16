@@ -1,6 +1,6 @@
 package haw.cas.praktikum.parser.prolog.pathers;
 
-import haw.cas.praktikum.objects.LocalServices;
+import haw.cas.praktikum.objects.Services;
 import haw.cas.praktikum.objects.Ort;
 import haw.cas.praktikum.parser.MObjektRepository;
 import haw.cas.praktikum.parser.Obj.MObjekt;
@@ -23,8 +23,8 @@ public class LinkLocalServiceParser implements PrologParser{
 		MObjekt localService =  MObjektRepository.get(service);
 		
 		assert (ort instanceof Ort) : "Not a valid Ort for a Link";
-		assert (localService instanceof LocalServices ) : "Not a valid LocalSer service";;
+		assert (localService instanceof Services ) : "Not a valid LocalSer service";;
 		
-		((Ort)ort).addLocalService((LocalServices)localService);
+		((Ort)ort).addLocalService((Services)localService);
 	}
 }

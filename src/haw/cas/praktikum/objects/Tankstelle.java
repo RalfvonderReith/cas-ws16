@@ -7,7 +7,7 @@ import haw.cas.praktikum.zeittyp.ZeitTyp;
 
 
 //TODO:Serialisierung . . .
-public class Tankstelle extends MObjekt implements LocalServices {
+public class Tankstelle extends MObjekt implements Services {
 
 	private Double preis; 
 	private ZeitTyp kostenZeit;

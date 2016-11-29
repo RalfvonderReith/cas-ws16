@@ -1,0 +1,36 @@
+#Auftrag
+- Methode Interface Auftraggeber -> Abschluss des Auftrags?
+- Auftraggeber in Parser? 
+- wer ist der Auftragnehmer ? merkt sich das der Auftrag? der Auftraggeber? die Umladebucht bei der Abgabe?
+
+#Börse
+- Bietprotokoll - in Jason ?
+- es wird nur das höchstgebot gespeichert
+- bietsystem? - derzeit zeitbasiert: nach Gebot 5 sekunden Zeit, um zu überbieten.
+- wohin mit Auftrag nach der Versteigerung?
+- fehlende Diagramme für Versteigerung!
+- Kommunikation:
+	1. Auftragsliste senden
+	2. gebot annehmen
+	3. höchstgebot zurückgeben
+	4. Auftrag annehmen
+	5. Auftrag vergeben
+
+#Auftragsgenerator
+- in jason?
+- 
+
+Notizen
+					Auftrag (2) -> is finished=true
+				|				
+			X-sub1 (3)
+				
+				Ersteller/Auftraggeber 	-> Auftragnehmer/Ablieferer
+Auftrag (5000) - 	Generator 			-> 		Peter
+
+Sub1 (1000) -> 		Peter 			->		Dieter
+
+
+
+auftrag - wert - bieter - timer 
+

@@ -15,16 +15,28 @@ public class Auftrag extends MObjekt {
 	private int menge;
 	private List<Auftrag> subAuftraege;
 	Auftrag parent=null;
+	private boolean isFinished = false;
 	
 	//TODO einbinden des Auftraggebers! und auszahlen des Geldes!
+	//TODO einbinden Auftragnehmer
 	Auftraggeber auftraggeber;
 	
-	public Auftrag(String name, Ort startOrt, Ort endOrt, double gewinn, int menge){
+	public Auftrag(String name, Ort startOrt, Ort endOrt, double gewinn, int menge, Auftraggeber auftraggeber){
 		super(name);
 		setStart(startOrt);
 		setZiel(endOrt);
 		setWert(gewinn);
 		setMenge(menge);
+		this.auftraggeber = auftraggeber;
+		this.subAuftraege = new ArrayList<Auftrag>();
+	}
+	
+	public Auftrag(Ort startOrt, Ort endOrt, double gewinn, int menge, Auftraggeber auftraggeber){
+		setStart(startOrt);
+		setZiel(endOrt);
+		setWert(gewinn);
+		setMenge(menge);
+		setAuftraggeber(auftraggeber);
 		this.subAuftraege = new ArrayList<Auftrag>();
 	}
 
@@ -49,7 +61,16 @@ public class Auftrag extends MObjekt {
 	public Double getWert() {
 		return gewinn;
 	}
+	
+	public Auftraggeber getAuftraggeber() {
+		return auftraggeber;
+	}
 
+	private void setAuftraggeber(Auftraggeber auftraggeber) {
+		if(auftraggeber == null) throw new NullPointerException();
+		this.auftraggeber = auftraggeber;
+	}
+	
 	private void setWert(double wert) {
 		if(wert < 0) throw new IllegalArgumentException("value >= 0 expected");
 		this.gewinn = wert;
@@ -71,22 +92,48 @@ public class Auftrag extends MObjekt {
 
 	public void removeSubAuftrag(Auftrag auftrag) {
 		subAuftraege.remove(auftrag);
+		if(isComplete()) {
+			beendeAuftrag();
+		}
 	}
 
+	//benachrichtige Auftraggeber, den Auftragnehmer zu bezahlen. 
+	public void beendeAuftrag() {
+		if(parent != null) {
+			parent.removeSubAuftrag(this);
+		}
+		//TODO: AUTRAGNEHMER AUSZAHLEN
+		//Auftraggeber.auszahlen(this.gewinn, )
+	}
+	
 	public List<Auftrag> getAllSubAuftrag() {
 		return new ArrayList<Auftrag>(subAuftraege);
 	}
 	
+	//check if this task itself is done (ignoring subtasks)
 	public boolean isFinished(Ort currentLocation) {
 		//Aufträge werden bei Abschluss aus der Liste der Parent.subaufträge entfernt, deshalb prüfen auf subAuftraege.size() == 0
-		return (endOrt == currentLocation && subAuftraege.size() == 0);
+		isFinished = (endOrt == currentLocation);
+		return isComplete();
 	}
 	
-	public Auftrag splitAuftrag(String subName, double subGewinn, int subMenge) {
-		if(subGewinn < 0 || subMenge < 1 || subMenge > menge) return null;
-		Auftrag subAuftrag = new Auftrag(subName, startOrt, endOrt, subGewinn, subMenge);
+	//check if subtasks are finished
+	public boolean subsFinished() {
+		return subAuftraege.size() == 0;
+	}
+	
+	//check if task and subtasks are finished
+	public boolean isComplete() {
+		return isFinished && subsFinished();
+	}
+	
+	public Auftrag splitAuftrag(double subGewinn, int subMenge, Auftraggeber auftraggeber) {
+		if(subGewinn <= 0 || subMenge < 1 || subMenge > menge) return null;
+		Auftrag subAuftrag = new Auftrag(startOrt, endOrt, subGewinn, subMenge, auftraggeber);
+		subAuftraege.add(subAuftrag);
 		this.addSubAuftrag(subAuftrag);
-		this.setMenge(this.getMenge() - subMenge);
+		this.setMenge(getMenge()-subMenge);
 		return subAuftrag;
 	}
+	
 }

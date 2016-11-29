@@ -5,7 +5,7 @@ import haw.cas.praktikum.objects.Boerse;
 import haw.cas.praktikum.objects.Funk;
 import haw.cas.praktikum.objects.Handelsregister;
 import haw.cas.praktikum.objects.Konsortium;
-import haw.cas.praktikum.objects.LocalServices;
+import haw.cas.praktikum.objects.Services;
 import haw.cas.praktikum.objects.Nachricht;
 import haw.cas.praktikum.objects.SchwarzesBrett;
 import haw.cas.praktikum.objects.Tankstelle;
@@ -19,7 +19,7 @@ import java.util.stream.Stream;
 public class LocalServiceGenerator implements PrologGenerator {
 	@Override
 	public void generate(ConfigFile cf, Stream<MObjekt> os) {
-		os.filter(s -> s instanceof LocalServices).forEach( // Sektions nummer
+		os.filter(s -> s instanceof Services).forEach( // Sektions nummer
 															// Auslagern in
 															// andere Klasse ?
 				f -> {

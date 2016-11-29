@@ -6,7 +6,7 @@ import java.util.List;
 import haw.cas.praktikum.parser.Obj.MObjekt;
 
 //TODO:Serialisierung . . .
-public class Funk extends MObjekt implements LocalServices {
+public class Funk extends MObjekt implements Services {
 	
 	private List<Ort> verfuegbar;
 	//TODO : Fehlt hier nicht was?

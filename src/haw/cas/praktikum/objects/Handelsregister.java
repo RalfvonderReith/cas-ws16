@@ -7,7 +7,7 @@ import haw.cas.praktikum.parser.Obj.MObjekt;
 
 
 //TODO:Serialisierung . . .
-public class Handelsregister extends MObjekt implements LocalServices{
+public class Handelsregister extends MObjekt implements Services{
 
     private List<Konsortium> eingetragen;
 

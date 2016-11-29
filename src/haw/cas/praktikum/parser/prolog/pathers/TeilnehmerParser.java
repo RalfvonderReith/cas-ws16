@@ -2,7 +2,7 @@ package haw.cas.praktikum.parser.prolog.pathers;
 
 import haw.cas.praktikum.objects.Akteur;
 import haw.cas.praktikum.objects.Konsortium;
-import haw.cas.praktikum.objects.LocalServices;
+import haw.cas.praktikum.objects.Services;
 import haw.cas.praktikum.objects.Ort;
 import haw.cas.praktikum.parser.MObjektRepository;
 import haw.cas.praktikum.parser.prolog.PrologParser;

@@ -3,7 +3,7 @@ package haw.cas.praktikum.parser.prolog.generators;
 import java.util.stream.Stream;
 
 import haw.cas.praktikum.objects.Ereignis;
-import haw.cas.praktikum.objects.LocalServices;
+import haw.cas.praktikum.objects.Services;
 import haw.cas.praktikum.objects.Ort;
 import haw.cas.praktikum.objects.Strasse;
 import haw.cas.praktikum.parser.Obj.MObjekt;
@@ -29,7 +29,7 @@ public class NetGenerator implements PrologGenerator {
 															 	+e.getEnde()+").");
 							}
 						}
-						for(LocalServices l : ((Ort)ort).getLocalServices()){
+						for(Services l : ((Ort)ort).getLocalServices()){
 							cf.addToSection(2, "linkLocal(" + ort.getUID() +"," + l.getID() + ").");
 						}
 					}

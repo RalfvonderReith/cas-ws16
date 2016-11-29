@@ -23,7 +23,7 @@ public class AuftragParser implements PrologParser {
 		Double gewinn = Double.parseDouble(gewinnS);
 		int menge = Integer.parseInt(mengeS);
 		
-		new Auftrag(name, startpos, endpos, gewinn, menge);
+		//new Auftrag(name, startpos, endpos, gewinn, menge);
 	}
 
 }

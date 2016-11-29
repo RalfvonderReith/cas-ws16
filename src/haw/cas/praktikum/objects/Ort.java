@@ -9,13 +9,13 @@ import haw.cas.praktikum.parser.Obj.MObjekt;
 public class Ort extends MObjekt {
 
     private List<Strasse> angebunden;
-    private List<LocalServices> localServices;
+    private List<Services> localServices;
 
     public Ort(String name) {
         this(name, new ArrayList<>(), new ArrayList<>());
     }
 
-    private Ort(String name, List<Strasse> angebunden, List<LocalServices> localServices) {
+    private Ort(String name, List<Strasse> angebunden, List<Services> localServices) {
         super(name);
         this.angebunden = angebunden;
         this.localServices = localServices;
@@ -29,11 +29,11 @@ public class Ort extends MObjekt {
         this.angebunden = angebunden;
     }
 
-    public void addLocalService(LocalServices localService) {
+    public void addLocalService(Services localService) {
         localServices.add(localService);
     }
 
-    public void removeLocalService(LocalServices localService) {
+    public void removeLocalService(Services localService) {
         localServices.remove(localService);
     }
 
@@ -53,11 +53,11 @@ public class Ort extends MObjekt {
         super.updateKey(name);
     }
 
-    public List<LocalServices> getLocalServices() {
+    public List<Services> getLocalServices() {
         return localServices;
     }
 
-    public void setLocalServices(List<LocalServices> localServices) {
+    public void setLocalServices(List<Services> localServices) {
         this.localServices = localServices;
     }
 }
