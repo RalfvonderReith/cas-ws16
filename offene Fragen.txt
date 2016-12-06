@@ -74,4 +74,9 @@ Auftrag:
  - basisauftrag geht in zustand "checklist" - diese kann nicht abgelegt oder verkauft werden und dient dem träger zur verwaltung der subaufträge (siehe Auszahlung/Abschluss)
  - Spieler erhält basisauftrag als rückmeldung.
  
+/////
+
+Boerse angepasst
+Auftrag: Zustand + Zustandsgetter und setter eingefügt
+
 

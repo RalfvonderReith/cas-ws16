@@ -17,6 +17,15 @@ public class Auftrag extends MObjekt {
 	Auftrag parent=null;
 	private boolean isFinished = false;
 	
+	private State state = State.LIEFERSCHEIN;
+	
+	
+	public enum State {
+			LIEFERSCHEIN, 
+			WARENLIEFERUNG,
+			CHECKLISTE
+	}
+	
 	//TODO einbinden des Auftraggebers! und auszahlen des Geldes!
 	//TODO einbinden Auftragnehmer
 	Auftraggeber auftraggeber;
@@ -40,6 +49,33 @@ public class Auftrag extends MObjekt {
 		this.subAuftraege = new ArrayList<Auftrag>();
 	}
 
+	//STATE METHODS
+	public void getWarenLieferung() {
+		if(!(state == State.CHECKLISTE))
+			this.state = State.WARENLIEFERUNG;
+	}
+
+	public void getLieferschein(Ort currentLocation) {
+		if(!(state == State.CHECKLISTE))
+			startOrt = currentLocation;
+			this.state = State.LIEFERSCHEIN;
+	}
+	
+	public boolean isLieferschein() {
+		return state == State.LIEFERSCHEIN;
+	}
+	
+
+	public boolean isChecklist() {
+		return state == State.CHECKLISTE;
+	}
+	
+
+	public boolean isWarenLieferung() {
+		return state == State.WARENLIEFERUNG;
+	}
+	//
+	
 	public Ort getStart() {
 		return startOrt;
 	}

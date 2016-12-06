@@ -25,8 +25,10 @@ public class Boerse extends MObjekt implements Services {
         return super.getUID();
     }
 
-    public void addAuftrag(Auftrag auftrag) {
-        auftragsliste.put(auftrag, typ.neueVersteigerung(this, auftrag));
+    public boolean addAuftrag(Auftrag auftrag) {
+        if(!auftrag.isLieferschein()) return false;
+    	auftragsliste.put(auftrag, typ.neueVersteigerung(this, auftrag));
+    	return true;
     }
 
     public void removeAuftrag(Auftrag auftrag) {
