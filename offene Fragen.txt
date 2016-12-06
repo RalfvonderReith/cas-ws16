@@ -34,3 +34,44 @@ Sub1 (1000) -> 		Peter 			->		Dieter
 
 auftrag - wert - bieter - timer 
 
+//
+//
+//
+
+Auftrag: 
+
+2 Zustände: Lieferschein / Warenladung
+
+- Auftrag wird generiert -> Lieferschein kommt in Börse
+- Börse verkauft auftrag -> Lieferschein kommt in LKW
+//Lieferschein zum Ziel fahren bringt nichts.
+//Lieferscheine zählen nicht zur aktuellen Ladung des LKWs
+- LKW fährt zu Start-Umladebucht
+- LKW will waren haben -> Lieferschein wird zu Warenladung (boolean auf true) und wird in Umladebucht gepackt
+- LKW teilt auftrag -> zwei (Teil-)Warenladungen (Auftrag 1 und 2) in Umladebucht
+- LKW nimmt Auftrag 1 -> Umladebucht übergibt auftrag 1
+- LKW übermittelt ID von Auftrag 2 an anderen Spieler, damit dieser sich den holen kann
+- LKW fährt zu ziel und lädt waren aus -> abschluss -> benachrichtigen des Auftraggebers (siehe letzer Teil)
+
+- LKW 2 fährt zu bucht und fragt nach auftrags-ID -> kann auftrag einladen
+- LKW 2 fährt zu unbekannten Ort/Ladebucht mit Auftrag und lädt diesen ab -> Warenladung in Ladebucht
+- LKW 2 wandelt auftrag in Lieferschein um -> Warenladung wird zu Lieferschein und Startort wird auf den Ort der Ladebucht gesetzt
+- LKW 2 kann nun mit Lieferschein zu Börse fahren und diesen verkaufen (dann beginnt das gleiche wieder mit dem Unterauftrag)
+
+//Auszahlung/Abschluss
+ - Auftraggeber bekommt nachricht über abschluss - auszahlen + streichen des entsprechenden Subauftrags aus seiner eigenen liste
+ - wenn Auftraggeber = generator : nur auszahlen, keine Benachrichtung und kein subauftrag streichen kram. 
+ 
+ //Auftrag teilen: kann nur in umladebucht erfolgen
+ - Auftrag wird durch angabe der Warenmenge eines subauftrags und des wertes beider entstehenden subaufträge in 2 subaufträge geteilt:
+ - Subaufträge übernehmen 
+ -- zielort und besitzer von basisauftrag
+ -- startort von aktueller umladebucht
+ -- menge und wert von angabe des spielers
+ -- auftraggeber ist besitzer von basisauftrag
+ - subaufträge werden in umladebucht hinterlegt
+ - basisauftrag bekommt subaufträge eingetragen
+ - basisauftrag geht in zustand "checklist" - diese kann nicht abgelegt oder verkauft werden und dient dem träger zur verwaltung der subaufträge (siehe Auszahlung/Abschluss)
+ - Spieler erhält basisauftrag als rückmeldung.
+ 
+
