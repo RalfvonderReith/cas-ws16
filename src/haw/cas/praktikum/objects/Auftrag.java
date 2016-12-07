@@ -14,21 +14,25 @@ public class Auftrag extends MObjekt {
 	private double gewinn;
 	private int menge;
 	private List<Auftrag> subAuftraege;
-	Auftrag parent=null;
+	private Auftrag parent=null;
 	private boolean isFinished = false;
+	
+	//TODO einbinden des Auftraggebers! und auszahlen des Geldes!
+	//TODO einbinden Auftragnehmer
+	private Auftraggeber auftraggeber;
+	private Auftragbesitzer auftragbesitzer;
+	
 	
 	private State state = State.LIEFERSCHEIN;
 	
-	
+
 	public enum State {
 			LIEFERSCHEIN, 
 			WARENLIEFERUNG,
 			CHECKLISTE
 	}
 	
-	//TODO einbinden des Auftraggebers! und auszahlen des Geldes!
-	//TODO einbinden Auftragnehmer
-	Auftraggeber auftraggeber;
+	
 	
 	public Auftrag(String name, Ort startOrt, Ort endOrt, double gewinn, int menge, Auftraggeber auftraggeber){
 		super(name);
@@ -107,6 +111,22 @@ public class Auftrag extends MObjekt {
 		this.auftraggeber = auftraggeber;
 	}
 	
+	public Auftragbesitzer getAuftragbesitzer() {
+		return auftragbesitzer;
+	}
+
+	public void setAuftragbesitzer(Auftragbesitzer auftragbesitzer) {
+		this.auftragbesitzer = auftragbesitzer;
+	}
+	
+	public State getState() {
+		return state;
+	}
+
+	public void setState(State state) {
+		this.state = state;
+	}
+	
 	private void setWert(double wert) {
 		if(wert < 0) throw new IllegalArgumentException("value >= 0 expected");
 		this.gewinn = wert;
@@ -163,13 +183,34 @@ public class Auftrag extends MObjekt {
 		return isFinished && subsFinished();
 	}
 	
-	public Auftrag splitAuftrag(double subGewinn, int subMenge, Auftraggeber auftraggeber) {
-		if(subGewinn <= 0 || subMenge < 1 || subMenge > menge) return null;
-		Auftrag subAuftrag = new Auftrag(startOrt, endOrt, subGewinn, subMenge, auftraggeber);
-		subAuftraege.add(subAuftrag);
-		this.addSubAuftrag(subAuftrag);
-		this.setMenge(getMenge()-subMenge);
-		return subAuftrag;
+	public List<Auftrag> splitAuftrag(Ort startOrt,double subGewinn1, double subGewinn2, int subMenge, Auftraggeber auftraggeber, Auftragbesitzer auftragbesitzer) {
+		
+		if(subGewinn1 <= 0 || subGewinn2 <= 0 || subMenge < 1 || subMenge > menge) return null;
+		
+		Auftrag subAuftrag1 = new Auftrag(startOrt, this.endOrt, subGewinn1, subMenge, auftraggeber);
+		subAuftrag1.setAuftragbesitzer(auftragbesitzer);
+		
+		int submenge2 = this.menge-subMenge;
+		Auftrag subAuftrag2 = new Auftrag(startOrt, this.endOrt, subGewinn2, submenge2, auftraggeber);
+		subAuftrag2.setAuftragbesitzer(auftragbesitzer);
+		
+		//TODO: Auftraggeber und Auftragbesitzer zz schlechte impl ändern!!!
+		
+		
+		this.addSubAuftrag(subAuftrag1);
+		this.addSubAuftrag(subAuftrag2);
+		
+		this.setMenge(0);
+		this.setState(State.CHECKLISTE);
+		
+		List<Auftrag> returnList = new ArrayList<>();
+		
+		
+		returnList.add(this);
+		returnList.add(subAuftrag1);
+		returnList.add(subAuftrag2);
+		
+		return returnList;
 	}
 	
 }
