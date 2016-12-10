@@ -24,7 +24,9 @@ public class Auftragsgenerator extends MObjekt implements Auftraggeber, Runnable
 
     private int aktivitaetsrate;
     private List<Ort> zustaendigFuer;
+ // private List<Object> zustaendigFuer;	
     private List<Boerse> zustaendigeBoersen;
+ // private Ortsnetz orte;
 
     public Auftragsgenerator(String name, int aktivitaetsrate) {
         super(name);
@@ -53,6 +55,10 @@ public class Auftragsgenerator extends MObjekt implements Auftraggeber, Runnable
     public void bereichErweitern(Ort o) {
         zustaendigFuer.add(o);
     }
+
+/*    public void bereichErweitern() {,		
+        zustaendigFuer.add(orte.get());
+    }*/
 
     public void bereichVerkleinern(Ort o) {
         zustaendigFuer.remove(o);
