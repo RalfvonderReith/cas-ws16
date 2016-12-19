@@ -27,6 +27,13 @@ public class Auftragsgenerator extends MObjekt implements Auftraggeber, Runnable
  // private List<Object> zustaendigFuer;	
     private List<Boerse> zustaendigeBoersen;
  // private Ortsnetz orte;
+	
+   public void bezahlen(Auftraggeber auftragnehmer, Auftrag auftrag){
+	if ((auftrag.isFinished = true) && (auftrag.auftraggeber == auftragnehmer){
+		auftragnehmer.kontoStand = auftragnehmer.kontoStand + auftrag.gewinn;
+	}
+    }
+
 
     public Auftragsgenerator(String name, int aktivitaetsrate) {
         super(name);
