@@ -157,20 +157,17 @@ public class Auftrag extends MObjekt {
 		return (state == State.CHECKLISTE && subAuftraege.isEmpty()) || (state != State.CHECKLISTE && this.startOrt == currentLocation);
 	}
 	
-	public List<Auftrag> splitAuftrag(Ort startOrt,double subGewinn1, double subGewinn2, int subMenge, Auftraggeber auftraggeber, Auftragbesitzer auftragbesitzer) {
+	public List<Auftrag> splitAuftrag(double subGewinn1, double subGewinn2, int subMenge) {
 		
 		if(state == State.LIEFERSCHEIN && (subGewinn1 <= 0 || subGewinn2 <= 0 || subMenge < 1 || subMenge > menge)) return null;
 		
-		Auftrag subAuftrag1 = new Auftrag(startOrt, this.endOrt, subGewinn1, subMenge, auftraggeber);
-		subAuftrag1.setAuftragbesitzer(auftragbesitzer);
+		Auftrag subAuftrag1 = new Auftrag(this.startOrt, this.endOrt, subGewinn1, subMenge, (Auftraggeber) this.auftragbesitzer);
+		subAuftrag1.setAuftragbesitzer(this.auftragbesitzer);
 		
 		int submenge2 = this.menge-subMenge;
-		Auftrag subAuftrag2 = new Auftrag(startOrt, this.endOrt, subGewinn2, submenge2, auftraggeber);
-		subAuftrag2.setAuftragbesitzer(auftragbesitzer);
-		
-		//TODO: Auftraggeber und Auftragbesitzer zz schlechte impl �ndern!!!
-		
-		
+		Auftrag subAuftrag2 = new Auftrag(this.startOrt, this.endOrt, subGewinn2, submenge2, (Auftraggeber) this.auftragbesitzer);
+		subAuftrag2.setAuftragbesitzer(this.auftragbesitzer);
+				
 		this.addSubAuftrag(subAuftrag1);
 		this.addSubAuftrag(subAuftrag2);
 		
