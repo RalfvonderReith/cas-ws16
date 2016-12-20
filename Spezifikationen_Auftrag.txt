@@ -1,0 +1,38 @@
+Auftrag:
+
+Hat drei Stadien:
+    - Lieferschein
+    - Wahrenladung
+    - Checklist
+
+Der Auftrag kennt:
+    - Startort
+    - Zielort
+    - Gewinn
+    - Menge
+    - Unteraufträge (wenn vorhanden)
+    - Auftraggeber
+    - Auftragbesitzer
+    - Fertig (true/false)
+
+Fakten:
+        - Der Auftrag kann von Agenten geteilt werden.
+        - Der Auftrag kann nur im Stadium Lieferschein geteilt werden.
+        - Die Teilung erzeugt zwei neue Aufträge und der alte Auftrag geht 
+          in das Statium Checklist ueber 
+        - Bei der Teilung werden Groe�e des ersten Unterauftrags 
+          und der Gewinn beider Unterauftraege benoetigt
+        - Wenn Auftrag Ziel erreicht meldet jeweilige Umladebucht 
+          dem Auftraggeber das Auftrag Fertig ist
+        - Wenn Auftrag im Statium Checkliste ist und fertig geworden ist,
+          meldet der jeweilige Besitzer dem Auftraggeber dies
+Hinweis:        
+        - Es ist möglich, das ein Auftrag bei einer Umladebucht wieder abgegeben werden kann und somit wieder in das Statium Lieferschein umgewandelt werden kann.
+          Dabei wird der Startort von der Umladebucht angepasst.
+        
+        
+
+
+
+
+
