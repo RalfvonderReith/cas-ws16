@@ -1,0 +1,23 @@
+Boerse:
+
+- Kommunikation:
+	- Auftragsliste senden
+	- Gebot annehmen
+	- Hoechstgebot zurückgeben
+	- Auftrag annehmen
+	- Auftrag vergeben
+?	- Versteigerungsart ändern
+
+Fakten:
+	Standart Bietverfahren (Klassische)
+    - Es wird nur das Höchstgebot gespeichert
+	- Nach ablauf der Zeit gewinnt das Höhstgebot
+	- Sobald erstes Gebot für Auftrag eingeht, startet ein 
+	  5 Sekunden Timer innerhalb dieser Zeit kann das Gebot überboten werden
+	- Wenn ein neues Gebot eingeht, wird der Timer wieder auf 5 Sekunden gesetzt
+	- Bei Vergabe des Auftrages wird der Besitzer des Auftrages 
+	  auf den Gewinner gesetzt und ihm übermittelt
+
+
+
+
