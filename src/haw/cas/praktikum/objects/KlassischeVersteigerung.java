@@ -11,9 +11,18 @@ public class KlassischeVersteigerung implements Versteigerung {
 	private Thread timer = new Thread(new Runnable() {
 	    @Override
 	    public void run() {
-	    	if(!(lastBid == -1)) {
-	    		if(System.currentTimeMillis() > lastBid + TIME_TO_BID)
-	    			versteigert();
+	    	try {
+	    		while(true) {
+		    		if(!(lastBid == -1)) {
+			    		if(System.currentTimeMillis() > lastBid + TIME_TO_BID) {
+			    			versteigert();
+			    			timer.interrupt();
+			    		}
+		    		}
+		    		Thread.sleep(100);
+	    		}
+	    	} catch (InterruptedException e) {
+	    		
 	    	}
 	    }
 	});
